@@ -22,7 +22,7 @@ Steps -
   -v nexus-data:/nexus-data \
   sonatype/nexus3
 
-5. Fetch password -
+5. Fetch password - from the link mentioned in sona site by accessing via IP address
 
 # docker ps
 
@@ -109,8 +109,8 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/ygminds73/maven-simple-master.git'
-            }
+               git branch: 'main', url: 'https://github.com/Anuk910/Mini-project.git'
+        }
         }
 
         stage('Build with Maven') {
@@ -131,18 +131,18 @@ pipeline {
             steps {
                 sh """
                 curl -u admin:admin@123 -O \
-                http://65.2.9.176:8081/repository/maven-releases/com/github/jitpack/maven-simple/0.2-SNAPSHOT/maven-simple-0.2-SNAPSHOT.jar
-                """
+            http://54.147.7.110:8081/repository/maven-releases/com/github/jitpack/Mini-project/0.2-SNAPSHOT/maven-simple-0.2-SNAPSHOT.jar
+            """
             }
         }
 
         stage('Deploy to Nginx') {
             steps {
                 sh """
-                sudo rm -rf /var/www/html/*
-                sudo cp target/maven-simple-0.2-SNAPSHOT.jar /var/www/html/
-                sudo systemctl restart nginx
-                """
+             sudo rm -rf /var/www/html/*
+            sudo cp target/Mini-project-0.2-SNAPSHOT.jar /var/www/html/
+            sudo systemctl restart nginx
+            """
             }
         }
     }
